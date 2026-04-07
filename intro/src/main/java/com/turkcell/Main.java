@@ -94,29 +94,36 @@ public class Main {
 
         // Metotlar
         calculateGrade(85);
-        calculateGrade(70);
+        calculateGrade(70, "Elif");
         calculateGrade(60);
-        calculateGrade(50);
-        calculateGrade(30);
+        calculateGrade(50, "Orhan");
+        calculateGrade(30, "İrfan");
 
     }
 
-    public static void calculateGrade(int grade) {
+    public static void calculateGrade(int grade, String name) // required parameter
+    {
         if(grade >= 85) 
         {
-            System.out.println("A");
+            System.out.println(name + " Notunuz: A");
         } 
         else if(grade >= 70) 
         {
-            System.out.println("B");
+            System.out.println(name + " Notunuz: B");
         }
         else if(grade >= 50) 
         {
-            System.out.println("C");
+            System.out.println(name + " Notunuz: C");
         }
         else 
         {
-            System.out.println("F");
+            System.out.println(name + " Notunuz: F");
         }
+    }
+
+    // Overloading
+    public static void calculateGrade(int grade) // optional parameter
+    {
+        calculateGrade(grade, "Öğrenci");
     }
 }
