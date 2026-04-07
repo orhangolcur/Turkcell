@@ -8,9 +8,11 @@ public class OOP {
         car1.model = "BMW";
         car1.brand = "X5";
         car1.year = 2020;
-        car1.setPrice(750000);
+        
+        car1.setPricePerDay(-500.0);
 
-        System.out.println(car1.getPrice());
+        System.out.println(car1.brand);
+        System.out.println(car1.getPricePerDay());
         
     }
 }

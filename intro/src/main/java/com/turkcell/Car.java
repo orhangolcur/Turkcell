@@ -2,22 +2,24 @@ package com.turkcell;
 
 public class Car {
 
-    public int year; // public => her yerden erişilebilir
     public String model;
-    protected String brand; // protected => aynı paket içinden ve alt sınıflardan erişilebilir
-    private double price; // private => sadece bu sınıf içinde erişilebilir
+    public String brand;
+    public int year;
 
     // Encapsulation
-    public double getPrice() {
-        return price;
+    private double pricePerDay;
+    
+    public void setPricePerDay(double pricePerDay) {
+        if (pricePerDay < 0) {
+            System.out.println("Fiyat negatif olamaz! 0'a eşitleniyor...");
+            this.pricePerDay = 0.0;
+            return;
+        }
+        this.pricePerDay = pricePerDay;
     }
 
-    public void setPrice(double price) {
-        if (price < 0) {
-            System.out.println("Fiyat negatif olamaz.");
-            return;
-        } 
-        this.price = price;
+    public double getPricePerDay() {
+        return pricePerDay;
     }
 
 }
