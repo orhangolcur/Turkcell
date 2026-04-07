@@ -55,6 +55,25 @@ public class Main {
         String s6 = new String("Turkcell"); // yeni bir String nesnesi oluşturur, string pool'dan değil heap'ten referans alır
 
         System.out.println(s5 == s6);
+        
+        System.out.println("------------------");
+
+        // Döngüler
+        for(int i = 0; i < 5; i++) {
+            System.out.println(i);
+        }
+
+        System.out.println("------------------");
+
+        String[] students = {"Orhan", "Elif", "Yaren"};
+        
+        for(int i = 0; i < students.length; i++) {
+            System.out.println(students[i]);
+        }
+
+        for(String student : students) {
+            System.out.println(student);
+        }
 
     }
 }
