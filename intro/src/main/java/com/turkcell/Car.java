@@ -8,10 +8,13 @@ public class Car extends Vehicle {
 
     // Constructor => nesne oluşturulurken çağrılır, nesnenin başlangıç durumunu belirler
     // Yazmazsak default constructor (parametresiz) oluşturulur
-    public Car(boolean hasSunroof, String brand, int year) {
-        this.hasSunroof = hasSunroof;
-        super.setBrand(brand); // super anahtar kelimesi, üst sınıfın (Vehicle) setBrand metodunu çağırır
-        super.setYear(year);
+    public Car(boolean hasSunroof, String brand) {
+        super(); // Vehicle'ın parametresiz constructor'ını çağırır
+        this.setHasSunroof(hasSunroof);
+        super.setBrand(brand);
+    }
+
+    public Car() {
     }
 
     // Encapsulation => dışarıdan manipülasyona kapalı
@@ -24,8 +27,12 @@ public class Car extends Vehicle {
 
     // clone() metodu, nesnenin bir kopyasını oluşturur ve döner. Bu sayede, dışarıdan gelen array'in referansını değil, kopyasını kullanarak encapsulation sağlanır.
 
-    
+    public boolean isHasSunroof() {
+        return hasSunroof;
+    }
 
-    
+    public void setHasSunroof(boolean hasSunroof) {
+        this.hasSunroof = hasSunroof;
+    }
 
 }

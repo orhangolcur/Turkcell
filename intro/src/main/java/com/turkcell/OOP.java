@@ -3,7 +3,7 @@ package com.turkcell;
 public class OOP {
     public static void main(String[] args) {
 
-        Car car1 = new Car(false, "BMW", 2020); // car1, Car instance'ıdır
+        Car car1 = new Car(false, "BMW"); // car1, Car instance'ıdır
 
         String[] specs = {"Sunroof", "Leather seats", "Navigation system"};
         car1.setSpecs(specs);
@@ -16,8 +16,7 @@ public class OOP {
         System.out.println(car1.getPricePerDay());
         
 
-        Car car2 = new Car(true, "Audi", 2020);
+        Car car2 = new Car(true, "Audi");
         System.out.println(car2.getBrand());
-        System.out.println(car2.getYear());
     }
 }
