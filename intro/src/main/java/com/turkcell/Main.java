@@ -81,6 +81,14 @@ public class Main {
             whileDongusu++;
         }
 
+        System.out.println("------------------");
+
+        String name = "Orhan";
+        System.out.println(name);
+        String name2 = name.concat("abc");
+        System.out.println(name2);
+        System.out.println(name);
+        //String immutable'dir, yani değiştirilemez. concat() metodu yeni bir String oluşturur ve eski String'i değiştirmez.
 
     }
 }
