@@ -100,6 +100,14 @@ public class Main {
 
         System.out.println(result1);
         System.out.println(result2);
+
+        System.out.println("------------------");
+
+        double sum1 = sum(2.5, 3.3);
+        double sum2 = sum(1, 2, 3, 4);
+        System.out.println("Sum 1: " + sum1);
+        System.out.println("Sum 2: " + sum2);
+
     }
 
     public static String calculateGrade(int grade, String name) // required parameter
@@ -130,5 +138,17 @@ public class Main {
     public static String calculateGrade(int grade) // optional parameter
     {
         return calculateGrade(grade, "Öğrenci");
+    }
+
+    public static double sum(double a, double b) {
+        return a + b;
+    }
+
+    public static double sum(double... numbers) { // varargs (Variable Arguments) - istediğimiz kadar parametre gönderebiliriz
+        double total = 0;
+        for(double number : numbers) {
+            total += number;
+        }
+        return total;
     }
 }
