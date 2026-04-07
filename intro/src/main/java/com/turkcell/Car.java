@@ -1,25 +1,22 @@
 package com.turkcell;
 
-public class Car {
+public class Car extends Vehicle {
 
-    public String model;
-    public String brand;
-    public int year;
+    private boolean hasSunroof;
+    private String[] specs;
 
-    // Encapsulation
-    private double pricePerDay;
+    // Encapsulation => dışarıdan manipülasyona kapalı
+    public String[] getSpecs() {
+        return specs.clone();
+    }
+    public void setSpecs(String[] specs) {
+        this.specs = specs.clone();
+    }
+
+    // clone() metodu, nesnenin bir kopyasını oluşturur ve döner. Bu sayede, dışarıdan gelen array'in referansını değil, kopyasını kullanarak encapsulation sağlanır.
+
     
-    public void setPricePerDay(double pricePerDay) {
-        if (pricePerDay < 0) {
-            System.out.println("Fiyat negatif olamaz! 0'a eşitleniyor...");
-            this.pricePerDay = 0.0;
-            return;
-        }
-        this.pricePerDay = pricePerDay;
-    }
 
-    public double getPricePerDay() {
-        return pricePerDay;
-    }
+    
 
 }
