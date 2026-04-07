@@ -90,5 +90,33 @@ public class Main {
         System.out.println(name);
         //String immutable'dir, yani değiştirilemez. concat() metodu yeni bir String oluşturur ve eski String'i değiştirmez.
 
+        System.out.println("------------------");
+
+        // Metotlar
+        calculateGrade(85);
+        calculateGrade(70);
+        calculateGrade(60);
+        calculateGrade(50);
+        calculateGrade(30);
+
+    }
+
+    public static void calculateGrade(int grade) {
+        if(grade >= 85) 
+        {
+            System.out.println("A");
+        } 
+        else if(grade >= 70) 
+        {
+            System.out.println("B");
+        }
+        else if(grade >= 50) 
+        {
+            System.out.println("C");
+        }
+        else 
+        {
+            System.out.println("F");
+        }
     }
 }
