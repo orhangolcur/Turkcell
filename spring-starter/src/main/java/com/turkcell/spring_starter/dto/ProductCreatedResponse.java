@@ -1,8 +1,7 @@
-package com.turkcell.spring_starter.model;
+package com.turkcell.spring_starter.dto;
 
-// Entity, Domain Model, Model => Veritabanı nesnesinin temsilcisi
-public class Product {
-    private int id;
+public class ProductCreatedResponse {
+    private int id; // Response'da id de dönebilir. Çünkü oluşturulan ürünün id'sine ihtiyaç duyulabilir. Örneğin, oluşturulan ürünün detay sayfasına yönlendirme yapılabilir.
     private String name;
     private double price;
 
