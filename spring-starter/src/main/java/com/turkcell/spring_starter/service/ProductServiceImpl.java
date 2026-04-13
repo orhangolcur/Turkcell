@@ -14,9 +14,8 @@ public class ProductServiceImpl {
 
     public ProductCreatedResponse create (ProductForCreateDto productForCreateDto) {
 
-        if (productForCreateDto.getPrice() < 0) {
-            throw new IllegalArgumentException("Price cannot be negative");
-        }
+        checkIfProductNameExists(productForCreateDto.getName());
+        
 
         Product product = new Product();
         product.setId(productList.size() + 1);
@@ -31,5 +30,23 @@ public class ProductServiceImpl {
         response.setPrice(product.getPrice());
 
         return response;
+    }
+
+    public void update() {
+        checkIfProductNameExists("");
+    }
+
+    private void checkIfProductNameExists(String name) {
+
+        Product productWithSameName = productList
+            .stream()
+            .filter(p -> p.getName().equals(name))
+            .findFirst()
+            .orElse(null);
+
+        if (productWithSameName != null) {
+            throw new IllegalArgumentException("Aynı isimde bir ürün zaten mevcut");
+        }
+
     }
 }
