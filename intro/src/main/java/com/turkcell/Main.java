@@ -114,22 +114,18 @@ public class Main {
     {
         if(grade >= 85) 
         {
-            String result = name + " Notunuz: A";
-            return result;
+            return name + " Notunuz: A";
         } 
         else if(grade >= 70) 
         {
-            String result = name + " Notunuz: B";
             return name + " Notunuz: B";
         }
         else if(grade >= 50) 
         {
-            String result = name + " Notunuz: C";
             return name + " Notunuz: C";
         }
         else 
         {
-            String result = name + " Notunuz: F";
             return name + " Notunuz: F";
         }
     }
