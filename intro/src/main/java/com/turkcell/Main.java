@@ -94,9 +94,9 @@ public class Main {
 
         String result1 = calculateGrade(85); 
         String result2 = calculateGrade(70, "Elif"); 
-        String result3 = calculateGrade(60); 
-        String result4 = calculateGrade(50, "Orhan");
-        String result5 = calculateGrade(30, "İrfan");
+        //String result3 = calculateGrade(60); 
+        //String result4 = calculateGrade(50, "Orhan");
+        //String result5 = calculateGrade(30, "İrfan");
 
         System.out.println(result1);
         System.out.println(result2);
