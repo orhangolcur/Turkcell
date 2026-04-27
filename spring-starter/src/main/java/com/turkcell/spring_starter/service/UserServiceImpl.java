@@ -2,7 +2,6 @@ package com.turkcell.spring_starter.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.turkcell.spring_starter.dto.user.LoginRequest;
 import com.turkcell.spring_starter.dto.user.RegisterRequest;
 import com.turkcell.spring_starter.entity.User;
@@ -19,6 +18,14 @@ public class UserServiceImpl {
     }
 
     public void registerUser(RegisterRequest registerRequest) {
+        // iş kuralı
+        User userWithSameEmail = userRepository.findByEmail(registerRequest.getEmail())
+                                                .orElse(null);
+        
+        if(userWithSameEmail != null) {
+            throw new RuntimeException("Bu e-posta zaten kayıtlı.");
+        }                                       
+
         User user = new User();
 
         user.setEmail(registerRequest.getEmail());
