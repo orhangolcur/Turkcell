@@ -2,7 +2,6 @@ package com.turkcell.spring_starter.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 import com.turkcell.spring_starter.dto.category.CreateCategoryRequest;
