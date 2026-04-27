@@ -14,12 +14,16 @@ import com.turkcell.spring_starter.dto.category.UpdatedCategoryResponse;
 import com.turkcell.spring_starter.entity.Category;
 import com.turkcell.spring_starter.repository.CategoryRepository;
 
+import jakarta.persistence.EntityManager;
+
 @Service
 public class CategoryServiceImpl {
     private final CategoryRepository categoryRepository; 
+    private final EntityManager entityManager;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, EntityManager entityManager) {
         this.categoryRepository = categoryRepository;
+        this.entityManager = entityManager;
     }
 
     public CreatedCategoryResponse create(CreateCategoryRequest request) {
@@ -78,9 +82,20 @@ public class CategoryServiceImpl {
         this.categoryRepository.delete(category);
     }
 
-        public List<ListCategoryResponse> search(String query)
+    public List<ListCategoryResponse> search(String query)
     {
-        Set<Category> categories = categoryRepository.findByNameLike("%" + query + "%");
+        //Set<Category> categories = categoryRepository.findByNameLike("%" + query + "%");
+
+        // String Concatination -> KESİNLİKLE YASAK, SQL injection riski var
+        //String jpql = "Select c from Category c Where c.name LIKE '%" + query + "%'";
+
+        String jpql = "Select c from Category c Where c.name like :query";
+
+        // Entity Manager SQL Injection riskine karşı gelen query'i kontrol eder ve sadece istenen formatta veri gelmesini sağlar
+        List<Category> categories = entityManager
+        .createQuery(jpql, Category.class)
+        .setParameter("query", "%" + query + "%")
+        .getResultList();
 
         List<ListCategoryResponse> responseList = new ArrayList<>();
 
