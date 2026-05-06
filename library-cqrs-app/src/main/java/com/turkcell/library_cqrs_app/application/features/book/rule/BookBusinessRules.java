@@ -1,4 +1,4 @@
-package com.turkcell.library_cqrs_app.application.features.book;
+package com.turkcell.library_cqrs_app.application.features.book.rule;
 
 import java.util.UUID;
 import org.springframework.stereotype.Component;

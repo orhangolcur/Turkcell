@@ -1,7 +1,8 @@
 package com.turkcell.library_cqrs_app.application.features.book.command.delete;
 
 import org.springframework.stereotype.Component;
-import com.turkcell.library_cqrs_app.application.features.book.BookBusinessRules;
+
+import com.turkcell.library_cqrs_app.application.features.book.rule.BookBusinessRules;
 import com.turkcell.library_cqrs_app.core.mediator.cqrs.CommandHandler;
 import com.turkcell.library_cqrs_app.persistence.repository.BookRepository;
 

@@ -1,7 +1,8 @@
 package com.turkcell.library_cqrs_app.application.features.branch.command.create;
 
 import org.springframework.stereotype.Component;
-import com.turkcell.library_cqrs_app.application.features.branch.BranchBusinessRules;
+
+import com.turkcell.library_cqrs_app.application.features.branch.rule.BranchBusinessRules;
 import com.turkcell.library_cqrs_app.core.mediator.cqrs.CommandHandler;
 import com.turkcell.library_cqrs_app.domain.entity.Branch;
 import com.turkcell.library_cqrs_app.persistence.repository.BranchRepository;

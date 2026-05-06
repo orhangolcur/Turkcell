@@ -1,7 +1,8 @@
 package com.turkcell.library_cqrs_app.application.features.category.command.create;
 
 import org.springframework.stereotype.Component;
-import com.turkcell.library_cqrs_app.application.features.category.CategoryBusinessRules;
+
+import com.turkcell.library_cqrs_app.application.features.category.rule.CategoryBusinessRules;
 import com.turkcell.library_cqrs_app.core.mediator.cqrs.CommandHandler;
 import com.turkcell.library_cqrs_app.domain.entity.Category;
 import com.turkcell.library_cqrs_app.persistence.repository.CategoryRepository;

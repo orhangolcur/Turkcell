@@ -1,7 +1,8 @@
 package com.turkcell.library_cqrs_app.application.features.staff.command.create;
 
 import org.springframework.stereotype.Component;
-import com.turkcell.library_cqrs_app.application.features.staff.StaffBusinessRules;
+
+import com.turkcell.library_cqrs_app.application.features.staff.rule.StaffBusinessRules;
 import com.turkcell.library_cqrs_app.core.mediator.cqrs.CommandHandler;
 import com.turkcell.library_cqrs_app.domain.entity.Staff;
 import com.turkcell.library_cqrs_app.persistence.repository.StaffRepository;

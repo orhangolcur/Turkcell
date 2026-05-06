@@ -1,7 +1,8 @@
 package com.turkcell.library_cqrs_app.application.features.author.command.create;
 
 import org.springframework.stereotype.Component;
-import com.turkcell.library_cqrs_app.application.features.author.AuthorBusinessRules;
+
+import com.turkcell.library_cqrs_app.application.features.author.rule.AuthorBusinessRules;
 import com.turkcell.library_cqrs_app.core.mediator.cqrs.CommandHandler;
 import com.turkcell.library_cqrs_app.domain.entity.Author;
 import com.turkcell.library_cqrs_app.persistence.repository.AuthorRepository;

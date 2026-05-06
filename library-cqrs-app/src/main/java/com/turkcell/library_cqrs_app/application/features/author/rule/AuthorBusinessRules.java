@@ -1,4 +1,4 @@
-package com.turkcell.library_cqrs_app.application.features.author;
+package com.turkcell.library_cqrs_app.application.features.author.rule;
 
 import java.util.List;
 import java.util.UUID;
