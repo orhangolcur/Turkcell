@@ -1,7 +1,7 @@
 package com.turkcell.library_cqrs_app.application.features.branch.command.update;
 
 import org.springframework.stereotype.Component;
-
+import com.turkcell.library_cqrs_app.application.features.branch.mapper.BranchMapper;
 import com.turkcell.library_cqrs_app.application.features.branch.rule.BranchBusinessRules;
 import com.turkcell.library_cqrs_app.core.mediator.cqrs.CommandHandler;
 import com.turkcell.library_cqrs_app.domain.entity.Branch;
@@ -12,10 +12,16 @@ public class UpdateBranchCommandHandler implements CommandHandler<UpdateBranchCo
 
     private final BranchRepository branchRepository;
     private final BranchBusinessRules branchBusinessRules;
+    private final BranchMapper branchMapper;
 
-    public UpdateBranchCommandHandler(BranchRepository branchRepository, BranchBusinessRules branchBusinessRules) {
+    public UpdateBranchCommandHandler(
+        BranchRepository branchRepository, 
+        BranchBusinessRules branchBusinessRules,
+        BranchMapper branchMapper
+    ) {
         this.branchRepository = branchRepository;
         this.branchBusinessRules = branchBusinessRules;
+        this.branchMapper = branchMapper;
     }
 
     @Override
@@ -24,20 +30,10 @@ public class UpdateBranchCommandHandler implements CommandHandler<UpdateBranchCo
 
         branchBusinessRules.branchNameMustBeUniqueForUpdate(command.id(), command.name());
 
-        branch.setName(command.name());
-        branch.setAddress(command.address());
-        branch.setPhone(command.phone());
+        branchMapper.branchFromUpdateCommand(branch, command);
 
         Branch updatedBranch = branchRepository.save(branch);
 
-        return new UpdateBranchResponse(
-            updatedBranch.getId(),
-            updatedBranch.getName(),
-            updatedBranch.getAddress(),
-            updatedBranch.getPhone()
-        );
+        return branchMapper.updateResponseFromBranch(updatedBranch);
     }
-
-    
-
 }

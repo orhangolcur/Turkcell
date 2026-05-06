@@ -3,8 +3,8 @@ package com.turkcell.library_cqrs_app.application.features.book.command.create;
 import java.util.HashSet;
 import java.util.List;
 import org.springframework.stereotype.Component;
-
 import com.turkcell.library_cqrs_app.application.features.author.rule.AuthorBusinessRules;
+import com.turkcell.library_cqrs_app.application.features.book.mapper.BookMapper;
 import com.turkcell.library_cqrs_app.application.features.book.rule.BookBusinessRules;
 import com.turkcell.library_cqrs_app.application.features.category.rule.CategoryBusinessRules;
 import com.turkcell.library_cqrs_app.core.mediator.cqrs.CommandHandler;
@@ -20,14 +20,21 @@ public class CreateBookCommandHandler implements CommandHandler<CreateBookComman
     private final BookBusinessRules bookBusinessRules;
     private final CategoryBusinessRules categoryBusinessRules;
     private final AuthorBusinessRules authorBusinessRules;
+    private final BookMapper bookMapper;
 
-    public CreateBookCommandHandler(BookRepository bookRepository, BookBusinessRules bookBusinessRules,
-            CategoryBusinessRules categoryBusinessRules, AuthorBusinessRules authorBusinessRules) {
+    public CreateBookCommandHandler(
+        BookRepository bookRepository, 
+        BookBusinessRules bookBusinessRules,
+        CategoryBusinessRules categoryBusinessRules, 
+        AuthorBusinessRules authorBusinessRules, 
+        BookMapper bookMapper
+    ) {
 
         this.bookRepository = bookRepository;
         this.bookBusinessRules = bookBusinessRules;
         this.categoryBusinessRules = categoryBusinessRules;
         this.authorBusinessRules = authorBusinessRules;
+        this.bookMapper = bookMapper;
     }
 
     @Override
@@ -39,24 +46,13 @@ public class CreateBookCommandHandler implements CommandHandler<CreateBookComman
 
         List<Author> authors = authorBusinessRules.getAllByIdsOrThrow(command.authorIds());
 
-        Book book = new Book();
-        book.setIsbn(command.isbn());
-        book.setTitle(command.title());
-        book.setStock(command.stock());
-        book.setPublishYear(command.publishYear());
+        Book book = bookMapper.bookFromCreateCommand(command);
         book.setCategory(category);
         book.setAuthors(new HashSet<>(authors));
 
         Book savedBook = bookRepository.save(book);
 
-        return new CreateBookResponse(
-                savedBook.getId(),
-                savedBook.getIsbn(),
-                savedBook.getTitle(),
-                savedBook.getStock(),
-                savedBook.getPublishYear(),
-                savedBook.getCategory().getName(),
-                authors.stream().map(author -> author.getFirstName() + " " + author.getLastName()).toList());
+        return bookMapper.createResponseFromBook(savedBook);
     }
 
 }

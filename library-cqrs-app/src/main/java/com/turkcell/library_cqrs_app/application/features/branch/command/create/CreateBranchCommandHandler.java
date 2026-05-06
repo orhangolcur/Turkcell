@@ -1,7 +1,7 @@
 package com.turkcell.library_cqrs_app.application.features.branch.command.create;
 
 import org.springframework.stereotype.Component;
-
+import com.turkcell.library_cqrs_app.application.features.branch.mapper.BranchMapper;
 import com.turkcell.library_cqrs_app.application.features.branch.rule.BranchBusinessRules;
 import com.turkcell.library_cqrs_app.core.mediator.cqrs.CommandHandler;
 import com.turkcell.library_cqrs_app.domain.entity.Branch;
@@ -12,29 +12,27 @@ public class CreateBranchCommandHandler implements CommandHandler<CreateBranchCo
 
     private final BranchRepository branchRepository;
     private final BranchBusinessRules branchBusinessRules;
+    private final BranchMapper branchMapper;
 
-    public CreateBranchCommandHandler(BranchRepository branchRepository, BranchBusinessRules branchBusinessRules) {
+    public CreateBranchCommandHandler(
+        BranchRepository branchRepository, 
+        BranchBusinessRules branchBusinessRules,
+        BranchMapper branchMapper
+    ) {
         this.branchRepository = branchRepository;
         this.branchBusinessRules = branchBusinessRules;
+        this.branchMapper = branchMapper;
     }
 
     @Override
     public CreateBranchResponse handle(CreateBranchCommand command) {
         branchBusinessRules.branchNameMustBeUnique(command.name());
 
-        Branch branch = new Branch();
-        branch.setName(command.name());
-        branch.setAddress(command.address());
-        branch.setPhone(command.phone());
+        Branch branch = branchMapper.branchFromCreateCommand(command);
 
         Branch savedBranch = branchRepository.save(branch);
 
-        return new CreateBranchResponse(
-            savedBranch.getId(),
-            savedBranch.getName(),
-            savedBranch.getAddress(),
-            savedBranch.getPhone()
-        );
+        return branchMapper.createResponseFromBranch(savedBranch);
     }
 
 }

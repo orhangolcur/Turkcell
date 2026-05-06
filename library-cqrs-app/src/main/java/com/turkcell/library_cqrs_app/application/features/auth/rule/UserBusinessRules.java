@@ -1,4 +1,4 @@
-package com.turkcell.library_cqrs_app.application.features.auth;
+package com.turkcell.library_cqrs_app.application.features.auth.rule;
 
 import org.springframework.stereotype.Component;
 import com.turkcell.library_cqrs_app.core.exception.AlreadyExistsException;

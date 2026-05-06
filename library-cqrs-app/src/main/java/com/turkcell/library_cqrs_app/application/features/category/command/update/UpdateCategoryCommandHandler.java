@@ -1,9 +1,10 @@
 package com.turkcell.library_cqrs_app.application.features.category.command.update;
 
 import org.springframework.stereotype.Component;
-
+import com.turkcell.library_cqrs_app.application.features.category.mapper.CategoryMapper;
 import com.turkcell.library_cqrs_app.application.features.category.rule.CategoryBusinessRules;
 import com.turkcell.library_cqrs_app.core.mediator.cqrs.CommandHandler;
+import com.turkcell.library_cqrs_app.domain.entity.Category;
 import com.turkcell.library_cqrs_app.persistence.repository.CategoryRepository;
 
 @Component
@@ -11,28 +12,28 @@ public class UpdateCategoryCommandHandler implements CommandHandler<UpdateCatego
 
     private final CategoryRepository categoryRepository;
     private final CategoryBusinessRules categoryBusinessRules;
+    private final CategoryMapper categoryMapper;
 
-    public UpdateCategoryCommandHandler(CategoryRepository categoryRepository,
-            CategoryBusinessRules categoryBusinessRules) {
+    public UpdateCategoryCommandHandler(
+        CategoryRepository categoryRepository,
+        CategoryBusinessRules categoryBusinessRules, 
+        CategoryMapper categoryMapper
+    ) {
         this.categoryRepository = categoryRepository;
         this.categoryBusinessRules = categoryBusinessRules;
+        this.categoryMapper = categoryMapper;
     }
 
     @Override
     public UpdateCategoryResponse handle(UpdateCategoryCommand command) {
-        var category = categoryBusinessRules.getByIdOrThrow(command.id());
+        Category category = categoryBusinessRules.getByIdOrThrow(command.id());
 
         categoryBusinessRules.categoryNameMustBeUniqueForUpdate(command.id(), command.name());
 
-        category.setName(command.name());
-        category.setDescription(command.description());
+        categoryMapper.categoryFromUpdateCommand(category, command);
 
-        categoryRepository.save(category);
+        Category saved = categoryRepository.save(category);
 
-        return new UpdateCategoryResponse(
-                category.getId(),
-                category.getName(),
-                category.getDescription());
+        return categoryMapper.updateResponseFromCategory(saved);
     }
-
 }

@@ -2,6 +2,7 @@ package com.turkcell.library_cqrs_app.application.features.book.query.getall;
 
 import java.util.List;
 import org.springframework.stereotype.Component;
+import com.turkcell.library_cqrs_app.application.features.book.mapper.BookMapper;
 import com.turkcell.library_cqrs_app.core.mediator.cqrs.QueryHandler;
 import com.turkcell.library_cqrs_app.persistence.repository.BookRepository;
 
@@ -9,25 +10,20 @@ import com.turkcell.library_cqrs_app.persistence.repository.BookRepository;
 public class GetAllBookQueryHandler implements QueryHandler<GetAllBookQuery, List<GetAllBookResponse>> {
 
     private final BookRepository bookRepository;
+    private final BookMapper bookMapper;
 
-    public GetAllBookQueryHandler(BookRepository bookRepository) {
+    public GetAllBookQueryHandler(
+        BookRepository bookRepository,
+        BookMapper bookMapper
+    ) {
         this.bookRepository = bookRepository;
+        this.bookMapper = bookMapper;
     }
 
     @Override
     public List<GetAllBookResponse> handle(GetAllBookQuery query) {
         return bookRepository.findAll().stream()
-                .map(book -> new GetAllBookResponse(
-                        book.getId(),
-                        book.getIsbn(),
-                        book.getTitle(),
-                        book.getStock(),
-                        book.getPublishYear(),
-                        book.getCategory() != null ? book.getCategory().getName() : null,
-                        book.getAuthors() != null ? book.getAuthors().stream()
-                                .map(author -> author.getFirstName() + " " + author.getLastName())
-                                .toList() : List.of()))
+                .map(bookMapper::getAllResponseFromBook)
                 .toList();
     }
-
 }

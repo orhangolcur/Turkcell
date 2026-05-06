@@ -2,7 +2,8 @@ package com.turkcell.library_cqrs_app.application.features.auth.command.register
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import com.turkcell.library_cqrs_app.application.features.auth.UserBusinessRules;
+
+import com.turkcell.library_cqrs_app.application.features.auth.rule.UserBusinessRules;
 import com.turkcell.library_cqrs_app.core.mediator.cqrs.CommandHandler;
 import com.turkcell.library_cqrs_app.domain.entity.User;
 import com.turkcell.library_cqrs_app.persistence.repository.UserRepository;
