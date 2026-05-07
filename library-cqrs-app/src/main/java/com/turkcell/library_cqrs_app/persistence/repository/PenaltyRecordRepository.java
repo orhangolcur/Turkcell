@@ -7,5 +7,5 @@ import com.turkcell.library_cqrs_app.domain.entity.PenaltyRecord;
 
 @Repository
 public interface PenaltyRecordRepository extends JpaRepository<PenaltyRecord, UUID> {
-
+    boolean existsByBorrowRecordId(UUID borrowRecordId);
 }

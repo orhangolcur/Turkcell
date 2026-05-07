@@ -7,5 +7,5 @@ import com.turkcell.library_cqrs_app.domain.entity.Reservation;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, UUID> {
-
+    boolean existsByStudentIdAndBookIdAndStatus(UUID studentId, UUID bookId, String status);
 }

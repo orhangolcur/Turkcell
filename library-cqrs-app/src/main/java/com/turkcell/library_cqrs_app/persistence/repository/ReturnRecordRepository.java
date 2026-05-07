@@ -7,5 +7,5 @@ import com.turkcell.library_cqrs_app.domain.entity.ReturnRecord;
 
 @Repository
 public interface ReturnRecordRepository extends JpaRepository<ReturnRecord, UUID> {
-
+    boolean existsByBorrowRecordId(UUID borrowRecordId);
 }
