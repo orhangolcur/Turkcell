@@ -1,4 +1,4 @@
-package com.turkcell.library_cqrs_app.core.config;
+package com.turkcell.library_cqrs_app.core.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

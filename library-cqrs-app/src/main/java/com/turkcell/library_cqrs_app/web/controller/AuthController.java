@@ -23,12 +23,12 @@ public class AuthController {
         this.mediator = mediator;
     }
 
-    @PostMapping("/register")
+    @PostMapping("register")
     public RegisterResponse register(@RequestBody @Valid RegisterCommand command) {
         return mediator.send(command);
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public LoginResponse login(@RequestBody @Valid LoginCommand command) {
         return mediator.send(command);
     }

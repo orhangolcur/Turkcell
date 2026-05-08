@@ -26,14 +26,15 @@ public class RegisterCommandHandler implements CommandHandler<RegisterCommand, R
     public RegisterResponse handle(RegisterCommand command) {
         userBusinessRules.emailMustBeUnique(command.email());
 
+        // todo: mapper'a taşı
         User user = new User();
         user.setEmail(command.email());
-
         String encodedPassword = passwordEncoder.encode(command.password());
         user.setPassword(encodedPassword);
 
         User saved = userRepository.save(user);
 
+        // todo: mapper'a taşı
         return new RegisterResponse(
                 saved.getId(),
                 saved.getEmail());
