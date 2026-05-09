@@ -40,7 +40,6 @@ public class SpringMediator implements Mediator
 
     // Hangi command/query -> hangi handler?
     private Object resolveHandler(Class<?> requestType, Class<?> handlerInterface) {
-        // TODO: Refactor & Add Caching
 
         // Tüm handlerları gez, komutla/query ile uyuşanı dön.
         String[] beanNames = context.getBeanNamesForType(handlerInterface);
@@ -70,7 +69,7 @@ public class SpringMediator implements Mediator
     // zincir başlatıcı
     private <R> R invokePipeline(Object request, RequestHandlerDelegate<R> handlerInvocation)
     {
-        RequestHandlerDelegate<R> next = handlerInvocation; // Handler'ın kendisi
+        RequestHandlerDelegate<R> next = handlerInvocation; // En sona handler'ın kendisi koyuluyor. Zincirin son halkası handler.
 
         for(int i = behaviors.size() - 1; i >= 0; i--) // Sıraya göre tersten Behaviorları çağır.
         {

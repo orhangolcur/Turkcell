@@ -6,7 +6,7 @@ import com.turkcell.library_cqrs_app.core.pipeline.PipelineBehavior;
 import com.turkcell.library_cqrs_app.core.pipeline.RequestHandlerDelegate;
 
 @Component
-@Order(10)
+@Order(20)
 public class AuthorizationBehavior implements PipelineBehavior{
 
     @Override
