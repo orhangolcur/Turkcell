@@ -1,10 +1,13 @@
 package com.turkcell.spring_cqrs.core.security.filter;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.turkcell.spring_cqrs.core.security.context.UserContext;
 import com.turkcell.spring_cqrs.core.security.jwt.JwtService;
 
 import jakarta.servlet.FilterChain;
@@ -18,9 +21,11 @@ import jakarta.servlet.http.HttpServletResponse;
 public class JwtAuthFilter extends OncePerRequestFilter{
 
     private final JwtService jwtService;
+    private final UserContext userContext;
 
-    public JwtAuthFilter(JwtService jwtService) {
+    public JwtAuthFilter(JwtService jwtService, UserContext userContext) {
         this.jwtService = jwtService;
+        this.userContext = userContext;
     }
 
     @Override
@@ -38,6 +43,10 @@ public class JwtAuthFilter extends OncePerRequestFilter{
             try {
                 if(jwtService.isTokenValid(token)) {
                     // Kullanıcıyı sisteme tanıt
+                    String userId = jwtService.extractUserId(token);
+                    String email = jwtService.extractEmail(token);
+                    List<String> roles = Collections.EMPTY_LIST; // todo: Implement
+                    userContext.setUser(userId, email, roles);
                 }
             } catch(Exception e) {
 
