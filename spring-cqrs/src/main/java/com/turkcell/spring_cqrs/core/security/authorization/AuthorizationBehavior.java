@@ -16,6 +16,11 @@ public class AuthorizationBehavior implements PipelineBehavior {
         this.userContext = userContext;
     }
 
+    @Override
+    public boolean supports(Object request) {
+        return request instanceof AuthorizableRequest;
+    }
+
     // ilgili handler'ın öncesi ve sonrası çalıştırabilen kodlar.
     @Override
     public <R> R handle(Object request, RequestHandlerDelegate<R> next) {
