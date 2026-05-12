@@ -15,10 +15,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-// Her istekte devreye gir, varsa JWT'i doğrula,
+// Her istekte devreye gir, varsa JWT'i doğrula. Controller'a ulaşmadan once bu filter devreye girecek.
 
 @Component
-public class JwtAuthFilter extends OncePerRequestFilter{
+public class JwtAuthFilter extends OncePerRequestFilter{ // her istekte 1 kez devreye girecek
 
     private final JwtService jwtService;
     private final UserContext userContext;
@@ -53,7 +53,7 @@ public class JwtAuthFilter extends OncePerRequestFilter{
             }
         }
 
-        filterChain.doFilter(request, response); // chaini ilerlet
+        filterChain.doFilter(request, response); // chaini ilerlet. istek controller'a gider
     }
 
 }

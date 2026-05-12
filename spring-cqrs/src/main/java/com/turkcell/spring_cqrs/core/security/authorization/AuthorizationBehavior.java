@@ -27,7 +27,7 @@ public class AuthorizationBehavior implements PipelineBehavior {
         if(!userContext.isAuthenticated())
             throw new RuntimeException("Giriş yapmalısın..");
             // todo: özel bir exception fırlat
-            // Handler da bu exception'ı eğer giriş yapılmışsa 401, (UnauthenticationException)
+            // Handler da bu exception'ı eğer giriş yapılmamışsa 401, (UnauthenticationException)
             // yapılmış ancak rol yetersiz ise 403 döndürecek şekilde (UnauthorizedException)
         return next.invoke(); // zincirdeki sonraki halkayı çağır..
     }

@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
+// uygulama içindeki herhangi bir servis veya handler UserContext'i intejct edip o anki kullanıcıya ulaşabilir.
+
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS) // her istekte class sıfırdan oluşur
 public class UserContext {

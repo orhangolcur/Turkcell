@@ -13,7 +13,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-
+// token işlemleri burada yapılır. oluşturma, dogrulama, claim alma
 @Service
 @EnableConfigurationProperties(JwtProperties.class)
 public class JwtService {
@@ -55,7 +55,7 @@ public class JwtService {
             return false;
         }
     }
-
+    // Claims alıp T dönen bir fonksiyon bekler
     private <T> T extractClaim(String token, Function<Claims, T> resolver) {
         Claims claims = Jwts.parser()
                             .verifyWith(signingKey)
