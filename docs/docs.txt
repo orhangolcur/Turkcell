@@ -1,0 +1,3 @@
+Design patterns - https://refactoring.guru/design-patterns
+
+Prompt engineering - https://www.kaggle.com/whitepaper-prompt-engineering
