@@ -1,7 +1,6 @@
 package com.turkcell.spring_cqrs.core.security.filter;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -45,7 +44,7 @@ public class JwtAuthFilter extends OncePerRequestFilter{ // her istekte 1 kez de
                     // Kullanıcıyı sisteme tanıt
                     String userId = jwtService.extractUserId(token);
                     String email = jwtService.extractEmail(token);
-                    List<String> roles = Collections.EMPTY_LIST; // todo: Implement
+                    List<String> roles = jwtService.extractRoles(token);
                     userContext.setUser(userId, email, roles);
                 }
             } catch(Exception e) {

@@ -2,6 +2,7 @@ package com.turkcell.spring_cqrs.core.security.jwt;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -26,19 +27,19 @@ public class JwtService {
         this.signingKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generate(UUID userId, String email)
+    public String generate(UUID userId, String email, List<String> roles)
     {
         Instant now = Instant.now();
         return Jwts.builder()
                    .issuer(this.jwtProperties.getIssuer())
                    .subject(userId.toString())
                    .claim("email", email)
-                   .claim("deneme", "deneme")
+                   .claim("roles", roles)
                    .issuedAt(Date.from(now))
                    .expiration(Date.from(now.plusSeconds(this.jwtProperties.getExpirationInSeconds())))
                    .signWith(this.signingKey)
                    .compact();
-    } 
+    }
 
     public String extractUserId(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -46,6 +47,19 @@ public class JwtService {
 
     public String extractEmail(String token) {
         return extractClaim(token, claims -> claims.get("email", String.class));
+    }
+
+    public List<String> extractRoles(String token) {
+        return extractClaim(token, claims -> {
+            Object rolesObj = claims.get("roles");
+            if (rolesObj instanceof List<?> roleList) {
+                return roleList.stream()
+                        .filter(String.class::isInstance)
+                        .map(String.class::cast)
+                        .toList();
+            }
+            return List.of();
+        });
     }
 
     public boolean isTokenValid(String token) {
