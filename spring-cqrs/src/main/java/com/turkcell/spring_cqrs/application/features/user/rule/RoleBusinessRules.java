@@ -14,7 +14,7 @@ public class RoleBusinessRules {
         this.roleRepository = roleRepository;
     }
 
-    public Role getByName(String name) {
+    public Role getRoleByNameOrThrow(String name) {
         return roleRepository.findByName(name)
                 .orElseThrow(() -> new NotFoundException("'" + name + "' rolü bulunamadı."));
     }

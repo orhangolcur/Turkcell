@@ -8,6 +8,7 @@ import com.turkcell.spring_cqrs.core.exception.UnauthenticatedException;
 import com.turkcell.spring_cqrs.core.exception.UnauthorizedException;
 import com.turkcell.spring_cqrs.core.mediator.pipeline.PipelineBehavior;
 import com.turkcell.spring_cqrs.core.mediator.pipeline.RequestHandlerDelegate;
+import com.turkcell.spring_cqrs.core.security.RequiresRoles;
 import com.turkcell.spring_cqrs.core.security.context.UserContext;
 
 @Component

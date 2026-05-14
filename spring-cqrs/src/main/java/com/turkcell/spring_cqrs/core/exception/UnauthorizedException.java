@@ -4,4 +4,8 @@ public class UnauthorizedException extends RuntimeException {
     public UnauthorizedException() {
         super("Bu işlem için yetkiniz bulunmamaktadır.");
     }
+
+    public UnauthorizedException(String message) {
+        super(message);
+    }
 }

@@ -3,7 +3,6 @@ package com.turkcell.spring_cqrs.application.features.user.command.register;
 import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
 import com.turkcell.spring_cqrs.application.features.user.rule.RoleBusinessRules;
 import com.turkcell.spring_cqrs.application.features.user.rule.UserBusinessRules;
 import com.turkcell.spring_cqrs.core.mediator.cqrs.CommandHandler;
@@ -31,7 +30,7 @@ public class RegisterCommandHandler implements CommandHandler<RegisterCommand, R
     public RegisterResponse handle(RegisterCommand command) {
         this.userBusinessRules.userWithSameEmailMustNotExist(command.email());
 
-        Role userRole = roleBusinessRules.getByName("USER");
+        Role userRole = roleBusinessRules.getRoleByNameOrThrow("USER");
 
         User user = new User();
         user.setEmail(command.email());
