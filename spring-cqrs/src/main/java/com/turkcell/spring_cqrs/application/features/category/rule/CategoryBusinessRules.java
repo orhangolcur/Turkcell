@@ -1,6 +1,7 @@
 package com.turkcell.spring_cqrs.application.features.category.rule;
 
 import org.springframework.stereotype.Component;
+import com.turkcell.spring_cqrs.core.exception.AlreadyExistsException;
 import com.turkcell.spring_cqrs.domain.Category;
 import com.turkcell.spring_cqrs.persistence.repository.CategoryRepository;
 
@@ -21,7 +22,7 @@ public class CategoryBusinessRules {
         Category categoryWithSameName = categoryRepository.findByName(name).orElse(null);
 
         if(categoryWithSameName!=null)
-            throw new RuntimeException("Aynı isimde 2 kategori eklenemez");
+            throw new AlreadyExistsException("Aynı isimde 2 kategori eklenemez");
     }
 
 }
