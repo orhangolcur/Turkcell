@@ -1,5 +1,7 @@
 package com.turkcell.spring_cqrs.domain;
 
+import java.util.UUID;
+import org.hibernate.annotations.UuidGenerator;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,15 +9,15 @@ import jakarta.persistence.*;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @UuidGenerator()
     @Column(name = "id")
-    private int id;
+    private UUID id;
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 }
